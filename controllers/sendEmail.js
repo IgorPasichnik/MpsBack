@@ -7,7 +7,7 @@ const sendEmail = async (req, res) => {
       port: 465,
       secure: true,
       auth: {
-        user: "metal-center.mps@mail.ru",
+        user: process.env.EMAIL_ADRESS,
         pass: process.env.EMAIL_PASSWORD,
       },
     });
@@ -19,8 +19,8 @@ const sendEmail = async (req, res) => {
       : "(Клиент не указал имя)";
 
     await transporter.sendMail({
-      from: "metal-center.mps@mail.ru",
-      to: "metal-center.mps@mail.ru",
+      from: process.env.EMAIL_ADRESS,
+      to: process.env.EMAIL_ADRESS,
       subject: "Новое сообщение о заявке",
       text: `${feedbackData}`,
       html: `От:  ${name}<br/>Email:  ${feedbackData.email}<br/>Телефон:  ${feedbackData.phoneNumber}<br/>Сообщение:  ${feedbackData.message}`,
